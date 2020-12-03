@@ -16,8 +16,7 @@ module.exports = {
             if (err) {
                 return res.sendStatus(403);
             }
-            
-            console.log(user);
+
             next();
         });
     },

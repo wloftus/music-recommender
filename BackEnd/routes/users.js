@@ -9,9 +9,22 @@ const auth = require('../auth');
 router.post('/signup/username/:username/type/:type', (req, res) => {
     db.query('INSERT INTO users(username, type) VALUES($1, $2)', [req.params.username, req.params.type], (err, results) => {
         if (err) {
-          return next(err);
+            res.status(409).send(err);
+        } else {
+            db.query('SELECT id FROM users WHERE username = $1', [req.params.username], (err, results) => {
+                if (err) {
+                    res.sendStatus(404);
+                } else {
+                    let result = results.rows[0];
+
+                    if (result) {
+                        res.status(201).send(result);
+                    } else {
+                        res.sendStatus(404);
+                    }              
+                }
+            });
         }
-        res.send(results.rows[0]);
     });
 });
 
@@ -20,9 +33,16 @@ router.post('/signup/username/:username/type/:type', (req, res) => {
 router.get('/id/:id', (req, res) => {
     db.query('SELECT * FROM users WHERE id = $1', [req.params.id], (err, results) => {
         if (err) {
-          return next(err);
+            res.sendStatus(404);
+        } else {
+            let result = results.rows[0];
+
+            if (result) {
+                res.send(result);
+            } else {
+                res.sendStatus(404);
+            }
         }
-        res.send(results.rows[0]);
     });
 });
 
@@ -30,9 +50,14 @@ router.get('/id/:id', (req, res) => {
 router.patch('/id/:id/profile_img/:profile_img', auth.authenticateToken, (req, res) => {
     db.query('UPDATE users SET profile_img = $2 WHERE id = $1', [req.params.id, req.params.profile_img], (err, results) => {
         if (err) {
-          return next(err);
+            res.sendStatus(404);
+        } else {
+            if (results.rowCount === 0) {
+                res.sendStatus(404);
+            } else {
+                res.sendStatus(200);
+            }
         }
-        res.send(results.rows[0]);
     });
 });
 
@@ -40,9 +65,14 @@ router.patch('/id/:id/profile_img/:profile_img', auth.authenticateToken, (req, r
 router.delete('/id/:id', auth.authenticateToken, (req, res) => {
     db.query('DELETE FROM users WHERE id = $1', [req.params.id], (err, results) => {
         if (err) {
-          return next(err);
+            res.sendStatus(404);
+        } else {
+            if (results.rowCount === 0) {
+                res.sendStatus(404);
+            } else {
+                res.sendStatus(200);
+            }
         }
-        res.send(results.rows[0]);
     });
 });
 
