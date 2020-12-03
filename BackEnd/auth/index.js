@@ -3,21 +3,21 @@ const jwt = require("jsonwebtoken");
 // https://www.digitalocean.com/community/tutorials/nodejs-jwt-expressjs
 module.exports = {
     authenticateToken: (req, res, next) => {
+ 
         // Gather the jwt access token from the request header
-        const authHeader = req.headers['Authorization']
-        const token = authHeader && authHeader.split(' ')[1]
+        const token = req.headers['authorization'];
 
         if (token == null) {
-            return res.sendStatus(401) // if there isn't any token
+            return res.sendStatus(401); // if there isn't any token
         }
     
-        jwt.verify(token, toString(process.env.ACCESS_TOKEN_SECRET), (err, user) => {
+        jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
             console.log(err);
             if (err) {
                 return res.sendStatus(403);
             }
             
-            req.user = user
+            console.log(user);
             next();
         });
     },
