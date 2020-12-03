@@ -13,11 +13,11 @@ router.post('/signup/username/:username/type/:type', (req, res) => {
 // GET USER (LOGIN)
 // No authentication required because we need a user to before we get a token.
 router.get('/id/:id', (req, res) => {
-    db.query('SELECT * FROM users WHERE id = $1', [req.params.id], (err, res) => {
+    db.query('SELECT * FROM users WHERE id = $1', [req.params.id], (err, results) => {
         if (err) {
           return next(err);
         }
-        res.send(res.rows[0]);
+        res.send(results.rows[0]);
     });
 });
 
