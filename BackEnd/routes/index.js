@@ -1,6 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-// Set routes here.
+const token = require('./token');
+const users = require('./users');
+
+router.user('/token', token);
+router.use('/users', users);
 
 module.exports = router;
