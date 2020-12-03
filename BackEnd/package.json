@@ -2,9 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "Backend for Kanye Music Recommender. Recommends you music by Kanye West.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "test": ""
   },
   "author": "William Loftus",
   "license": "ISC",
