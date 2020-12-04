@@ -178,7 +178,7 @@ XHTTP Request Example
 
 ### Description
 
-These API endpoints allow for certain CRUD operations on the vibes table in the database. A "vibe" is a certain mood that a song gives off. These enpoints include retrieving all the vibes or all vibes of a certain score. The score field is the mood of the vibe on a scale of 1 - 10. 1 being depressing and 10 being Hype.
+These API endpoints allow for certain CRUD operations on the vibes table in the database. A "vibe" is a certain mood that a song gives off. These endpoints include retrieving all the vibes or all vibes of a certain score. The score field is the mood of the vibe on a scale of 1 - 10. 1 being depressing and 10 being Hype.
 
 ### GET All Vibes
 
@@ -197,12 +197,7 @@ Sample Response: A list of all the vibes in the database.
             "score": 1,
             "user_id": 2
         },
-        {
-            "id": 2,
-            "name": "Dark",
-            "score": 2,
-            "user_id": 2
-        }
+        ...
     ]
 
 
@@ -225,7 +220,7 @@ XHTTP Request Example
     oReq.setRequestHeader("authorization", token);
     oReq.send();
 
-### GET Vibe
+### GET Vibe(s) By Score
 
 Retrieves one or more vibes by their score.
 
@@ -233,7 +228,7 @@ URI
 
     https://kanyemusicrecommender.herokuapp.com/api/v1/vibes/score/:score
 
-Sample Response: A list of all the vibes in the database.
+Sample Response: A list of all the vibes in the database that match the specified score.
 
     [
         {
@@ -241,7 +236,8 @@ Sample Response: A list of all the vibes in the database.
             "name": "Hyped",
             "score": 10,
             "user_id": 2
-        }
+        },
+        ...
     ]
 
 
@@ -270,6 +266,160 @@ XHTTP Request Example
 ## Songs
 
 ### Description
+
+These API endpoints allow for certain CRUD operations on the songs table in the database. These endpoints include creating a new song, retrieving all songs in the database, updating/replacing a song, and deleting a song.
+
+### POST New Song
+
+Creates a new song in the database. Takes a name, a song link, a user_id, a image, and an album name. The song name must be unique.
+
+URI
+
+    https://kanyemusicrecommender.herokuapp.com/api/v1/songs/name/:name/song_link/:song_link/user_id/:user_id/img/:img/album_name/:album_name
+
+Sample Response: The newly created song ID.
+
+    {
+        "id": 18
+    }
+
+
+XHTTP Request Example
+
+    // Listener Function
+    function reqListener () {
+        console.log(this.status);
+        console.log(this.responseText);
+    }
+
+    // JWT Token, replace with auto-generated token.
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDcwOTYzNzJ9.UaVT23_Fb3wEksk4AqDNYMBoDi-hw0iwFAkJH3oRXyA";
+
+    // Parameters
+    let name = "mySong";
+    let song_link = "mySongLink";
+    let user_id = 8;
+    let img = "mySongImgDataURL";
+    let album_name = "myAlbumName";
+
+    // Make Request
+    let oReq = new XMLHttpRequest();
+    oReq.addEventListener("load", reqListener);
+    oReq.open("POST", "https://kanyemusicrecommender.herokuapp.com/api/v1/songs/name/" + name + "/song_link/"+ song_link + "/user_id/"+ user_id + "/img/" + img + "/album_name/" + album_name);
+    // Add authorization
+    oReq.setRequestHeader("authorization", token);
+    oReq.send();
+
+### GET All Songs
+
+Retrieves all songs in the database.
+
+URI
+
+    https://kanyemusicrecommender.herokuapp.com/api/v1/songs/
+
+Sample Response: A list of all the songs in the database.
+
+    [
+        {
+            "id": 19,
+            "name": "mySong",
+            "song_link": "mySongLink",
+            "img": "mySongImgDataURL",
+            "album_name": "myAlbumName",
+            "user_id": 8
+        },
+        ...
+    ]
+
+
+XHTTP Request Example
+
+    // Listener Function
+    function reqListener () {
+        console.log(this.status);
+        console.log(this.responseText);
+    }
+
+    // JWT Token, replace with auto-generated token.
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDcwOTYzNzJ9.UaVT23_Fb3wEksk4AqDNYMBoDi-hw0iwFAkJH3oRXyA";
+
+    // Make Request
+    let oReq = new XMLHttpRequest();
+    oReq.addEventListener("load", reqListener);
+    oReq.open("GET", "https://kanyemusicrecommender.herokuapp.com/api/v1/songs/");
+    // Add authorization
+    oReq.setRequestHeader("authorization", token);
+    oReq.send();
+
+### PUT Song
+
+Updates/Replaces a song in the database by ID. Takes a JSON string of song keys and values to determine which fields in the database to update.
+
+URI
+
+    https://kanyemusicrecommender.herokuapp.com/api/v1/songs/id/:id/song/:song
+
+
+XHTTP Request Example
+
+    // Listener Function
+    function reqListener () {
+        console.log(this.status);
+        console.log(this.responseText);
+    }
+
+    // JWT Token, replace with auto-generated token.
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDcwOTYzNzJ9.UaVT23_Fb3wEksk4AqDNYMBoDi-hw0iwFAkJH3oRXyA";
+
+    // Parameters
+    let ID = 19;
+    let song = { 
+        "name": "test3", 
+        "song_link": "test-link", 
+        "img": "dataURL", 
+        "user_id": 2
+    };
+    // IMPORTANT use JSON.Stringify on song or error will occur.
+    song = JSON.stringify(song);
+
+    // Make Request
+    let oReq = new XMLHttpRequest();
+    oReq.addEventListener("load", reqListener);
+    oReq.open("PUT", "https://kanyemusicrecommender.herokuapp.com/api/v1/songs/id/"+ ID + "/song/" + song);
+    // Add authorization
+    oReq.setRequestHeader("authorization", token);
+    oReq.send();
+
+### DELETE Song
+
+Deletes a song in the database by ID.
+
+URI
+
+    https://kanyemusicrecommender.herokuapp.com/api/v1/songs/id/:id
+
+XHTTP Request Example
+
+    // Listener Function
+    function reqListener () {
+        console.log(this.status);
+        console.log(this.responseText);
+    }
+
+    // JWT Token, replace with auto-generated token.
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDcwOTYzNzJ9.UaVT23_Fb3wEksk4AqDNYMBoDi-hw0iwFAkJH3oRXyA";
+
+    // Parameters
+    let ID = 19;
+
+    // Make Request
+    let oReq = new XMLHttpRequest();
+    oReq.addEventListener("load", reqListener);
+    oReq.open("DELETE", "https://kanyemusicrecommender.herokuapp.com/api/v1/songs/id/" + ID);
+    // Add authorization
+    oReq.setRequestHeader("authorization", token);
+    oReq.send();
 
 ## Song Vibes
 
