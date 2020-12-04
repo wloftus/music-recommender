@@ -96,7 +96,7 @@ URI
 
     https://kanyemusicrecommender.herokuapp.com/api/v1/users/username/:username
 
-Sample Response: ID of the newly created user.
+Sample Response: The user specified by the ID.
 
     {
         "id": 8,

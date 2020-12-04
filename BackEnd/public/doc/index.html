@@ -84,7 +84,7 @@
     <p>Retrieves a User from the database by username. This is one the few API calls that does not require an authorization token. This is because this endpoint is involved in the login process of the App where the user has not been given a token yet.</p>
     <p>URI</p>
     <pre><code><span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/kanyemusicrecommender.herokuapp.com/api</span><span class="hljs-regexp">/v1/users</span><span class="hljs-regexp">/username/</span><span class="hljs-symbol">:username</span>
-    </code></pre><p>Sample Response: ID of the newly created user.</p>
+    </code></pre><p>Sample Response: The user specified by the ID.</p>
     <pre><code>{
         <span class="hljs-attr">"id"</span>: <span class="hljs-number">8</span>,
         <span class="hljs-attr">"username"</span>: <span class="hljs-string">"rowill"</span>,
