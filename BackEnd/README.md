@@ -424,3 +424,85 @@ XHTTP Request Example
 ## Song Vibes
 
 ### Description
+
+These API endpoints allow for certain CRUD operations on the song_vibes table in the database. The song_vibes table links a song and vibe together by ID. These operations include creating a new song vibe and getting songs by their vibe score.
+
+### POST Song Vibe
+
+Create a new song vibe entry in the database. Takes a song id and a vibe id. These are foreign key to the songs and vibes tables.
+
+URI
+
+    https://kanyemusicrecommender.herokuapp.com/api/v1/song_vibes/song_id/:song_id/vibe_id/:vibe_id/user_id/:user_id
+
+XHTTP Request Example
+
+    // Listener Function
+    function reqListener () {
+        console.log(this.status);
+        console.log(this.responseText);
+    }
+
+    // JWT Token, replace with auto-generated token.
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDcwOTYzNzJ9.UaVT23_Fb3wEksk4AqDNYMBoDi-hw0iwFAkJH3oRXyA";
+
+    // Parameters
+    let song_id = 3;
+    let vibe_id = 1;
+    let user_id = 14;
+
+    // Make Request
+    let oReq = new XMLHttpRequest();
+    oReq.addEventListener("load", reqListener);
+    oReq.open("POST", "https://kanyemusicrecommender.herokuapp.com/api/v1/song_vibes/song_id/" + song_id + "/vibe_id/" + vibe_id + "/user_id/" + user_id);
+    // Add authorization
+    oReq.setRequestHeader("authorization", token);
+    oReq.send();
+
+### GET Song Vibes By Score
+
+Gets all Song Vibes in the database by their vibe score.
+
+URI
+
+    https://kanyemusicrecommender.herokuapp.com/api/v1/song_vibes//score/:score
+
+Sample Response: A list of all the songs vibes in the database matching the specified score.
+
+    [
+        {
+            "song_vibe_id": 13,
+            "user_id": 2,
+            "song_id": 13,
+            "song_name": "Big Brother",
+            "song_link": "https://open.spotify.com/track/1x6jHJGczTBitBy06hIWgx",
+            "img": "myDataURL",
+            "album_name": "Graduation",
+            "vibe_id": 6,
+            "vibe_name": "Okay",
+            "score": 6
+        },
+        ...
+    ]
+
+XHTTP Request Example
+
+    // Listener Function
+    function reqListener () {
+        console.log(this.status);
+        console.log(this.responseText);
+    }
+
+    // JWT Token, replace with auto-generated token.
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDcwOTYzNzJ9.UaVT23_Fb3wEksk4AqDNYMBoDi-hw0iwFAkJH3oRXyA";
+
+    // Parameters
+    let score = 5;
+
+    // Make Request
+    let oReq = new XMLHttpRequest();
+    oReq.addEventListener("load", reqListener);
+    oReq.open("GET", "https://kanyemusicrecommender.herokuapp.com/api/v1/song_vibes/score/" + score);
+    // Add authorization
+    oReq.setRequestHeader("authorization", token);
+    oReq.send();
