@@ -21,17 +21,35 @@ router.post('/signup/username/:username/type/:type', (req, res) => {
                         res.status(201).send(result);
                     } else {
                         res.sendStatus(404);
-                    }              
+                    }
                 }
             });
         }
     });
 });
 
-// GET USER (LOGIN)
+// GET USER (LOGIN) by id
 // No authentication required because we need a user to before we get a token.
 router.get('/id/:id', (req, res) => {
     db.query('SELECT * FROM users WHERE id = $1', [req.params.id], (err, results) => {
+        if (err) {
+            res.sendStatus(404);
+        } else {
+            let result = results.rows[0];
+
+            if (result) {
+                res.send(result);
+            } else {
+                res.sendStatus(404);
+            }
+        }
+    });
+});
+
+// GET USER (LOGIN) by name
+// No authentication required because we need a user to before we get a token.
+router.get('/username/:username', (req, res) => {
+    db.query('SELECT id FROM users WHERE username = $1', [req.params.username], (err, results) => {
         if (err) {
             res.sendStatus(404);
         } else {
@@ -77,4 +95,3 @@ router.delete('/id/:id', auth.authenticateToken, (req, res) => {
 });
 
 module.exports = router;
-
