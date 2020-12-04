@@ -49,7 +49,7 @@ router.post('/signup/username/:username/type/:type', (req, res) => {
 // GET USER (LOGIN) by name
 // No authentication required because we need a user to before we get a token.
 router.get('/username/:username', (req, res) => {
-    db.query('SELECT id FROM users WHERE username = $1', [req.params.username], (err, results) => {
+    db.query('SELECT * FROM users WHERE username = $1', [req.params.username], (err, results) => {
         if (err) {
             res.sendStatus(404);
         } else {
