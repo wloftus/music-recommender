@@ -1,5 +1,14 @@
 # API Documentation
 
+### Table of Contents
+
+1. [Testing](#testing)
+2. [Token](#token)
+3. [Users](#users)
+4. [Vibes](#vibes)
+5. [Songs](#songs)
+6. [Song Vibes](#song-vibes)
+
 ## Testing
 
 Use the following token for testing of the API.
