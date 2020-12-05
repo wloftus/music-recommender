@@ -1,9 +1,8 @@
 
 //For user profile images
 function previewFile() {
-    const preview = $('img');
-    const file = $(IMG_FILE_TYPE_SEL).files[0];
-    // const file = document.querySelector('input[type=file]').files[0];
+    const preview = document.querySelector('img');
+    const file = document.querySelector('input[type=file]').files[0];
     const reader = new FileReader();
   
     reader.addEventListener("load", function () {
@@ -24,7 +23,7 @@ let username;
 
 // Check for empty strings
 function isEmpty(myString) {
-    return !(myString.trim() !== "");
+    return (myString.trim() !== "");
 }
 
 // Click on Submit for Username
@@ -33,12 +32,14 @@ $(USERNAME_BUTTON_ID_SEL).click(function() {
 
     if (isEmpty(username)) {
        alert("Valid Username");
-    } else {
-        alert("Word or Definition contains numbers or is empty.");
-        $(USERNAME_ID_SEL).val("");
     }
-    
+    else {
+        alert("Invalid username: No empty names allowed."); 
+    }
+    $(USERNAME_ID_SEL).val("");
 });
+
+
 
 // // On click Listener
 // function onLogInClick(name) {
