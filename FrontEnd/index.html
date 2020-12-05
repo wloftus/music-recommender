@@ -15,6 +15,10 @@
             <button id="login-username">Login</button>
         </div>
 
+        <h2>Vibes</h2>
+        <input type="range" id="vibe-input" min="1" max="10" onchange="updateTextInput(this.value);"><br>
+        <p id = "vibe-result"></p>
+
         <h2>Profile Picture</h2>
         <div id="image-submission">
             <input type="file" onchange="previewFile()"><br><br>
@@ -25,6 +29,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="js/strings.js"></script>
         <script src="js/userScript.js"></script>
+        <script src="js/userVibeScript.js"></script>
         <script src="js/userProfileImageScript.js"></script>
     </body>
 </html>

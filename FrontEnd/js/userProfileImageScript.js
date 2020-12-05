@@ -1,5 +1,13 @@
 //For user profile images
 let userImage;
+let LocalUserID = localStorage.getItem('user_id');
+
+// When Upate Profile Picture is clicked
+$(USER_IMG_BUTTON_ID_SEL).click(function() {
+    previewFile();
+    updateUserImage(LocalUserID, userImage);
+});
+
 
 // Preview the image file 
 function previewFile() {
@@ -11,7 +19,7 @@ function previewFile() {
       // convert image file to base64 string
       let imgString = reader.result;
       preview.src = imgString;
-      userImage = imgString;
+      onUpdateImage(imgString);
     }, false);
   
     if (file) {
@@ -20,12 +28,42 @@ function previewFile() {
     else {
         alert("This is not an image.");
     }
-    // clear local stor
+    // clear local storage?
+}
+
+// On click listener
+function onUpdateImage(imgURL) {
+    console.log("In onUpdateImage, User ID: " + LocalUserID);
+    userImage = imgURL;
+    updateUserImage(LocalUserID, userImage);
 }
 
 
-// When Upate Profile Picture is clicked
-$(USER_IMG_BUTTON_ID_SEL).click(function() {
-    previewFile();
-    // patchuserimage()
-});
+function updateUserImageListener() {
+    // Creation successful
+    if (this.status === 201) {
+        let profile_img = JSON.parse(this.responseText)["profile_img"];
+        localStorage.setItem('profile_img', profile_img);
+
+        console.log('User with ID: ' + LocalUserID + ' updated their profile image.');
+    } 
+    // Failed, probably the file is > 5MB
+    else {
+        alert("Please choose another image under 5MB.");
+    }
+}
+
+
+function updateUserImage(userID, profile_img) {
+    console.log("In updateUserImage with User ID: " + LocalUserID);
+    let token = localStorage.getItem('token');
+
+    // Make a request
+    let oReq = new XMLHttpRequest();
+    oReq.addEventListener("load", updateUserImageListener);
+    oReq.open("PATCH", "https://kanyemusicrecommender.herokuapp.com/api/v1/users/id/"+ userID + "/profile_img/" + profile_img);
+
+    // Add authorization
+    oReq.setRequestHeader("authorization", token);
+    oReq.send();
+}
