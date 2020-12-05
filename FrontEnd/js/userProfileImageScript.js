@@ -1,13 +1,9 @@
-//For user profile images
-let userImage;
-let LocalUserID = localStorage.getItem('user_id');
 
 // When Upate Profile Picture is clicked
 $(USER_IMG_BUTTON_ID_SEL).click(function() {
     previewFile();
-    updateUserImage(LocalUserID, userImage);
+    updateUserImage(localUserID, userImage);
 });
-
 
 // Preview the image file 
 function previewFile() {
@@ -33,9 +29,9 @@ function previewFile() {
 
 // On click listener
 function onUpdateImage(imgURL) {
-    console.log("In onUpdateImage, User ID: " + LocalUserID);
-    userImage = imgURL;
-    updateUserImage(LocalUserID, userImage);
+    let userImage = imgURL;
+    let localUserID = localStorage.getItem('user_id');
+    updateUserImage(localUserID, userImage);
 }
 
 
@@ -45,7 +41,7 @@ function updateUserImageListener() {
         let profile_img = JSON.parse(this.responseText)["profile_img"];
         localStorage.setItem('profile_img', profile_img);
 
-        console.log('User with ID: ' + LocalUserID + ' updated their profile image.');
+        console.log('User with ID: ' + localUserID + ' updated their profile image.');
     } 
     // Failed, probably the file is > 5MB
     else {
@@ -55,15 +51,13 @@ function updateUserImageListener() {
 
 
 function updateUserImage(userID, profile_img) {
-    console.log("In updateUserImage with User ID: " + LocalUserID);
-    let token = localStorage.getItem('token');
-
     // Make a request
     let oReq = new XMLHttpRequest();
     oReq.addEventListener("load", updateUserImageListener);
     oReq.open("PATCH", "https://kanyemusicrecommender.herokuapp.com/api/v1/users/id/"+ userID + "/profile_img/" + profile_img);
 
     // Add authorization
+    let token = localStorage.getItem('token');
     oReq.setRequestHeader("authorization", token);
     oReq.send();
 }
