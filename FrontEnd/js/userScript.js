@@ -103,23 +103,5 @@ function nextPage() {
     console.log('User ID: ' + localStorage.getItem('token'));
 }
 
+// Used for testing
 // onLogInClick("rowill");
-
-//For user profile images
-function previewFile() {
-    const preview = document.querySelector(USER_IMG_ID_SEL);
-    const file = document.querySelector(IMG_FILE_TYPE_SEL).files[0];
-    const reader = new FileReader();
-  
-    reader.addEventListener("load", function () {
-      // convert image file to base64 string
-      preview.src = reader.result;
-    }, false);
-  
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-    else {
-        alert("This is not an image.");
-    }
-  }
