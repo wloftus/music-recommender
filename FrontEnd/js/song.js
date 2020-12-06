@@ -22,26 +22,26 @@ function getMultipleSongs(jsonObj) {
 }
 
 // Preview the image file 
-function previewFile(imgLink) {
-    const preview = document.querySelector(SONG_IMG_ID_SEL);
-    //const file = document.querySelector(IMG_FILE_TYPE_SEL).files[0];
-    const file = imgLink;
-    const reader = new FileReader();
+// function previewFile(imgLink) {
+//     const preview = document.querySelector(SONG_IMG_ID_SEL);
+//     //const file = document.querySelector(IMG_FILE_TYPE_SEL).files[0];
+//     const file = imgLink;
+//     const reader = new FileReader();
   
-    reader.addEventListener("load", function () {
-      // convert image file to base64 string
-      let imgString = reader.result;
-      preview.src = imgString;
-    }, false);
+//     reader.addEventListener("load", function () {
+//       // convert image file to base64 string
+//       let imgString = reader.result;
+//       preview.src = imgString;
+//     }, false);
   
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-    else {
-        alert("This is not an image.");
-    }
-    // clear local storage?
-}
+//     if (file) {
+//       reader.readAsDataURL(file);
+//     }
+//     else {
+//         alert("This is not an image.");
+//     }
+//     // clear local storage?
+// }
 
 function getSongVibeByScoreListener() {
     // Creation successful
@@ -60,7 +60,8 @@ function getSongVibeByScoreListener() {
         $(SONG_TITLE_ID_SEL).text(song_name);
         $(SONG_ALBUM_ID_SEL).text(album_name);
         $(SONG_LINK_ID_SEL).attr("href", song_link);
-        previewFile(img);
+        $(SONG_IMG_ID_SEL).attr("src", img);
+        //previewFile(img);
 
         // console.log("In getSongVibeByScoreListener function.")
         // console.log(localStorage.getItem('song_name'));
