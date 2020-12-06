@@ -124,7 +124,7 @@ XHTTP Request Example
 
 ### PATCH User Profile Image
 
-Updates a user's profile image in the database by user ID.
+Updates a user's profile image in the database by user ID. We discovered that this does not work while hosting with heroku because there is a 8kb limit on the request line. Otherwise, it should work to the 5mb limit as specified in the app.js.
 
 URI
 
@@ -280,7 +280,7 @@ These API endpoints allow for certain CRUD operations on the songs table in the 
 
 ### POST New Song
 
-Creates a new song in the database. Takes a name, a song link, a user_id, a image, and an album name. The song name must be unique.
+Creates a new song in the database. Takes a name, a song link, a user_id, a image, and an album name. The song name must be unique. We discovered that providing the image as a dataURL does not work while hosting with heroku because there is a 8kb limit on the request line. Otherwise, it should work to the 5mb limit as specified in the app.js.
 
 URI
 

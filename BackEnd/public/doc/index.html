@@ -107,7 +107,7 @@
     oReq.open(<span class="hljs-string">"GET"</span>, <span class="hljs-string">"https://kanyemusicrecommender.herokuapp.com/api/v1/users/username/"</span> + username);
     oReq.send();
     </code></pre><h3 id="patch-user-profile-image">PATCH User Profile Image</h3>
-    <p>Updates a user&#39;s profile image in the database by user ID.</p>
+    <p>Updates a user&#39;s profile image in the database by user ID. We discovered that this does not work while hosting with heroku because there is a 8kb limit on the request line. Otherwise, it should work to the 5mb limit as specified in the app.js.</p>
     <p>URI</p>
     <pre><code><span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/kanyemusicrecommender.herokuapp.com/api</span><span class="hljs-regexp">/v1/users</span><span class="hljs-regexp">/id/</span><span class="hljs-symbol">:id/profile_img/</span><span class="hljs-symbol">:profile_img</span>
     </code></pre><p>XHTTP Request Example</p>
@@ -227,7 +227,7 @@
     <h3 id="description">Description</h3>
     <p>These API endpoints allow for certain CRUD operations on the songs table in the database. These endpoints include creating a new song, retrieving all songs in the database, updating/replacing a song, and deleting a song.</p>
     <h3 id="post-new-song">POST New Song</h3>
-    <p>Creates a new song in the database. Takes a name, a song link, a user_id, a image, and an album name. The song name must be unique.</p>
+    <p>Creates a new song in the database. Takes a name, a song link, a user_id, a image, and an album name. The song name must be unique. We discovered that providing the image as a dataURL does not work while hosting with heroku because there is a 8kb limit on the request line. Otherwise, it should work to the 5mb limit as specified in the app.js.</p>
     <p>URI</p>
     <pre><code><span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/kanyemusicrecommender.herokuapp.com/api</span><span class="hljs-regexp">/v1/songs</span><span class="hljs-regexp">/name/</span><span class="hljs-symbol">:name/song_link/</span><span class="hljs-symbol">:song_link/user_id/</span><span class="hljs-symbol">:user_id/img/</span><span class="hljs-symbol">:img/album_name/</span><span class="hljs-symbol">:album_name</span>
     </code></pre><p>Sample Response: The newly created song ID.</p>
