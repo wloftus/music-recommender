@@ -97,10 +97,10 @@ function getToken() {
 // This is where you would redirect user's to next page.
 function nextPage() {
     alert("Login Passed");
-
+    location.replace("index.html");
     // We can see that our user_id and token are both in local storage
     console.log('User ID: ' + localStorage.getItem('user_id'));
-    console.log('User ID: ' + localStorage.getItem('token'));
+    console.log('Token: ' + localStorage.getItem('token'));
 }
 
 // Used for testing
