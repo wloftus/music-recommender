@@ -1,22 +1,15 @@
 
+// Called in the index.html when the slider is moved
 function updateTextInput(vibeScore) {
-    // document.getElementById('textInput').value = val;
-    // $(USER_VIBE_RESULT_ID_SEL).text(val);
-    // vibeScore = $(USER_VIBE_RESULT_ID_SEL).val(); 
     console.log(vibeScore); 
     onUpdateVibe(vibeScore);
-
-    let vibeName = localStorage.getItem('vibe_name');
-    console.log("Vibe name at top: " + vibeName);
-    $(USER_VIBE_RESULT_ID_SEL).text(vibeName); 
 }
-
 
 // On click listener
 function onUpdateVibe(vibeScore) {
-    //let userVibeScore = vibeScore;
-    console.log("In onUpdateVibe, score: " + vibeScore);
     getUserVibeByScore(vibeScore);
+    let vibeName = localStorage.getItem('vibe_name');
+    $(USER_VIBE_RESULT_ID_SEL).text(vibeName); 
 }
 
 function getUserVibeByScoreListener() {
@@ -24,8 +17,8 @@ function getUserVibeByScoreListener() {
     console.log("This response: " + this.responseText);
     // Creation successful
     if (this.status === 200) {
-        let vibe_name = JSON.parse(this.responseText)['name'];
-        let vibe_score = JSON.parse(this.responseText)['score'];
+        let vibe_name = JSON.parse(this.responseText)[0]['name'];
+        let vibe_score = JSON.parse(this.responseText)[0]['score'];
 
         console.log("vibe_name: " + vibe_name);
         console.log("vibe_score: " + vibe_score);
@@ -49,7 +42,10 @@ function getUserVibeByScore(score) {
     oReq.open("GET", "https://kanyemusicrecommender.herokuapp.com/api/v1/vibes/score/" + score);
 
     // Add authorization
-    let token = localStorage.getItem('token');
+    // let token = localStorage.getItem('token');
+
+    // For testing
+    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDcwOTYzNzJ9.UaVT23_Fb3wEksk4AqDNYMBoDi-hw0iwFAkJH3oRXyA";
     oReq.setRequestHeader("authorization", token);
     oReq.send();
 }
