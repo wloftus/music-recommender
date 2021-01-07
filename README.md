@@ -16,46 +16,6 @@ This Web App will recommend you music by Kanye West based on your vibe or mood.
 
 IMPORTANT NOTE: We discovered that trying to send image dataURLS to the API does not work because it is hosted on Heroku. Heroku has a hard limit of 8kb on the request line, even though we specified a limit of 5mb in the app.js. If we hosted our API using a different service, posting images should have worked.
 
-## Testing
-
-Use the following token for testing of the API.
-
-    eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDcwMDA0NjB9.90CeRxm9qQ1SmT9HGYZFtLt_ElEhqvqs-Kxku9zE6AU
-
-## Token
-
-### Description
-
-This endpoint is used to get a token to use the core features of the API.
-
-### GET token
-
-Retrieve a authorization token from the database. Requires a username to generate a token.
-
-URI
-
-    https://kanyemusicrecommender.herokuapp.com/api/v1/token/username/:username
-
-Sample Response: The authorization token.
-
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDcwOTYzNzJ9.UaVT23_Fb3wEksk4AqDNYMBoDi-hw0iwFAkJH3oRXyA"
-
-XHTTP Request Example
-
-    // Listener Function
-    function reqListener () {
-        console.log(this.status);
-        console.log(this.responseText);
-    }
-
-    // Parameters
-    let username = "myUsername";
-
-    // Make Request
-    let oReq = new XMLHttpRequest();
-    oReq.addEventListener("load", reqListener);
-    oReq.open("GET", "https://kanyemusicrecommender.herokuapp.com/api/v1/token/username/" + username);
-    oReq.send();
 
 ## Users
 
@@ -145,8 +105,8 @@ XHTTP Request Example
         console.log(this.responseText);
     }
 
-    // JWT Token, replace with auto-generated token.
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDcwOTYzNzJ9.UaVT23_Fb3wEksk4AqDNYMBoDi-hw0iwFAkJH3oRXyA";
+    // JWT Token
+    let token = your_token;
 
     // Parameters
     let ID = 8;
@@ -176,8 +136,8 @@ XHTTP Request Example
         console.log(this.responseText);
     }
 
-    // JWT Token, replace with auto-generated token.
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDcwOTYzNzJ9.UaVT23_Fb3wEksk4AqDNYMBoDi-hw0iwFAkJH3oRXyA";
+    // JWT Token
+    let token = your_token;
 
     // Parameters
     let ID = 15;
@@ -225,8 +185,8 @@ XHTTP Request Example
         console.log(this.responseText);
     }
 
-    // JWT Token, replace with auto-generated token.
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDcwOTYzNzJ9.UaVT23_Fb3wEksk4AqDNYMBoDi-hw0iwFAkJH3oRXyA";
+    // JWT Token
+    let token = your_token;
 
     // Make Request
     let oReq = new XMLHttpRequest();
@@ -265,8 +225,8 @@ XHTTP Request Example
         console.log(this.responseText);
     }
 
-    // JWT Token, replace with auto-generated token.
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDcwOTYzNzJ9.UaVT23_Fb3wEksk4AqDNYMBoDi-hw0iwFAkJH3oRXyA";
+    // JWT Token
+    let token = your_token;
 
     // Parameters
     let score = 10;
@@ -308,8 +268,8 @@ XHTTP Request Example
         console.log(this.responseText);
     }
 
-    // JWT Token, replace with auto-generated token.
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDcwOTYzNzJ9.UaVT23_Fb3wEksk4AqDNYMBoDi-hw0iwFAkJH3oRXyA";
+    // JWT Token
+    let token = your_token;
 
     // Parameters
     let name = "mySong";
@@ -357,8 +317,8 @@ XHTTP Request Example
         console.log(this.responseText);
     }
 
-    // JWT Token, replace with auto-generated token.
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDcwOTYzNzJ9.UaVT23_Fb3wEksk4AqDNYMBoDi-hw0iwFAkJH3oRXyA";
+    // JWT Token
+    let token = your_token;
 
     // Make Request
     let oReq = new XMLHttpRequest();
@@ -385,8 +345,8 @@ XHTTP Request Example
         console.log(this.responseText);
     }
 
-    // JWT Token, replace with auto-generated token.
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDcwOTYzNzJ9.UaVT23_Fb3wEksk4AqDNYMBoDi-hw0iwFAkJH3oRXyA";
+    // JWT Token
+    let token = your_token;
 
     // Parameters
     let ID = 19;
@@ -423,8 +383,8 @@ XHTTP Request Example
         console.log(this.responseText);
     }
 
-    // JWT Token, replace with auto-generated token.
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDcwOTYzNzJ9.UaVT23_Fb3wEksk4AqDNYMBoDi-hw0iwFAkJH3oRXyA";
+    // JWT Token
+    let token = your_token;
 
     // Parameters
     let ID = 19;
@@ -459,8 +419,8 @@ XHTTP Request Example
         console.log(this.responseText);
     }
 
-    // JWT Token, replace with auto-generated token.
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDcwOTYzNzJ9.UaVT23_Fb3wEksk4AqDNYMBoDi-hw0iwFAkJH3oRXyA";
+    // JWT Token
+    let token = your_token;
 
     // Parameters
     let song_id = 3;
@@ -509,8 +469,8 @@ XHTTP Request Example
         console.log(this.responseText);
     }
 
-    // JWT Token, replace with auto-generated token.
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDcwOTYzNzJ9.UaVT23_Fb3wEksk4AqDNYMBoDi-hw0iwFAkJH3oRXyA";
+    // JWT Token
+    let token = your_token;
 
     // Parameters
     let score = 5;
